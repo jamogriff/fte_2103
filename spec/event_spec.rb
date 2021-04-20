@@ -40,6 +40,14 @@ RSpec.describe Event do
       expect(event.food_trucks_that_sell(name)).to eq([food_truck2])
     end
 
+    it 'can return sorted item list' do
+      event.add_food_truck(food_truck1)
+      event.add_food_truck(food_truck2)
+      event.add_food_truck(food_truck3)
+      expected = ['Apple Pie (Slice)', "Banana Nice Cream", 'Peach Pie (Slice)', "Peach-Raspberry Nice Cream"]
+      expect(event.sorted_item_list).to eq(expected)
+    end
+
   end
 
 end
