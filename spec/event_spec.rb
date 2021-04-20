@@ -56,6 +56,20 @@ RSpec.describe Event do
       expect(event.total_inventory[item4][:food_trucks].length).to eq(1)
     end
 
+    it 'can add all quantity of item' do
+      event.add_food_truck(food_truck1)
+      event.add_food_truck(food_truck2)
+      event.add_food_truck(food_truck3)
+      expect(event.get_quantity_from('Peach Pie (Slice)')).to eq(100)
+    end
+
+    it 'checks for overstocked items' do
+      event.add_food_truck(food_truck1)
+      event.add_food_truck(food_truck2)
+      event.add_food_truck(food_truck3)
+      expect(event.overstocked_items).to eq([item1])
+    end
+
   end
 
 end

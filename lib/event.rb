@@ -40,16 +40,16 @@ class Event
   end
 
   def get_quantity_from(item_name)
+    total_quantity = []
     @food_trucks.each do |truck|
       truck.inventory.each do |item|
-        # require 'pry'; binding.pry
         if item[0].name == item_name
-          return item[1]
-        else
-          0
+          total_quantity << item[1]
         end
       end
     end
+    total_quantity.uniq!
+    total_quantity.sum
   end
 
   def sorted_item_list
@@ -73,5 +73,15 @@ class Event
       }
     end
     total_inventory
+  end
+
+  def overstocked_items
+    overstock = []
+    total_inventory.each do |item, item_data|
+      if item_data[:quantity] > 50 && item_data[:food_trucks].length > 1
+        overstock << item
+      end
+    end
+    overstock
   end
 end
