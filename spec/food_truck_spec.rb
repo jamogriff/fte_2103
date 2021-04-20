@@ -3,7 +3,7 @@ require './lib/food_truck'
 
 RSpec.describe FoodTruck do
 
-  describe 'initialization and stocking' do
+  describe 'initialization, stocking, revenue' do
     item1 = Item.new({name: 'Peach Pie (Slice)', price: "$3.75"})
     item2 = Item.new({name: 'Apple Pie (Slice)', price: "$2.50"})
     food_truck = FoodTruck.new("Rocky Mountain Pies")
@@ -24,5 +24,9 @@ RSpec.describe FoodTruck do
       expect(food_truck.check_stock(item1)).to eq(25)
     end
 
+    it 'calculates potential revenue' do
+      expected = (25 * 3.75) + (12 * 2.50)
+      expect(food_truck.potential_revenue).to eq(expected)
+    end
   end
 end
