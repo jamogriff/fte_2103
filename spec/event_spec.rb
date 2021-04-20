@@ -48,6 +48,14 @@ RSpec.describe Event do
       expect(event.sorted_item_list).to eq(expected)
     end
 
+    it 'can report total inventory' do
+      event.add_food_truck(food_truck1)
+      event.add_food_truck(food_truck2)
+      event.add_food_truck(food_truck3)
+      expect(event.total_inventory[item4][:quantity]).to eq(50)
+      expect(event.total_inventory[item4][:food_trucks].length).to eq(1)
+    end
+
   end
 
 end

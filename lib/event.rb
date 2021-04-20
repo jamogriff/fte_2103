@@ -39,14 +39,39 @@ class Event
     end
   end
 
+  def get_quantity_from(item_name)
+    @food_trucks.each do |truck|
+      truck.inventory.each do |item|
+        # require 'pry'; binding.pry
+        if item[0].name == item_name
+          return item[1]
+        else
+          0
+        end
+      end
+    end
+  end
+
   def sorted_item_list
     the_list = []
     @food_trucks.each do |truck|
       truck.inventory.each do |item|
-        the_list << item[0].name
+        if item[1] > 0
+          the_list << item[0].name
+        end
       end
     end
     the_list.uniq.sort
   end
 
+  def total_inventory
+    total_inventory = {}
+    sorted_item_list.each do |item_name|
+      total_inventory[get_item_from(item_name)[0]] = {
+        quantity: get_quantity_from(item_name),
+        food_trucks: food_trucks_that_sell(item_name)
+      }
+    end
+    total_inventory
+  end
 end
