@@ -20,5 +20,9 @@ RSpec.describe FoodTruck do
       expect(food_truck.inventory[item1]).to eq(25)
     end
 
+    it 'can check stock' do
+      expect(food_truck.check_stock(item1)).to eq(25)
+    end
+
   end
 end
